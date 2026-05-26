@@ -1,16 +1,16 @@
 # 🚆 IRCTC Backend - Microservices Architecture
 
-> A production-grade microservices-based railway booking system backend, built for learning and demonstrating enterprise architecture patterns.
+A production-grade microservices-based railway booking system backend, built for learning and demonstrating enterprise architecture patterns.
 
 ---
 
 ## 📋 Table of Contents
 
-- [Overview](#-overview)
-- [Architecture](#-architecture)
-- [Port Reference](#-port-reference)
-- [Tech Stack](#-tech-stack)
-- [Getting Started](#-getting-started)
+- [Overview](#overview)
+- [Architecture](#architecture)
+- [Port Reference](#port-reference)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Running the Application](#running-the-application)
@@ -22,7 +22,7 @@
 
 ---
 
-## 🎯 Overview
+## Overview
 
 This project demonstrates a complete microservices architecture for a railway booking system (IRCTC clone), covering:
 
@@ -44,7 +44,7 @@ This project demonstrates a complete microservices architecture for a railway bo
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```txt
                             ┌───────────────────────┐
@@ -94,40 +94,40 @@ This project demonstrates a complete microservices architecture for a railway bo
 
 ---
 
-## 🔌 Port Reference
+## Port Reference
 
 A single quick-glance table of every port the project uses.
 
 ### Application Services
 
-| Service | Port | Direct URL |
-|---|---|---|
+| Service                 | Port | Direct URL              |
+| ----------------------- | ---- | ----------------------- |
 | Frontend (Vite + React) | 3000 | <http://localhost:3000> |
-| API Gateway | 4000 | <http://localhost:4000> |
-| User Service | 4001 | <http://localhost:4001> |
-| Search Service | 4002 | <http://localhost:4002> |
-| Admin Service | 4003 | <http://localhost:4003> |
-| Notification Service | 4004 | (Kafka-only, no HTTP) |
-| Booking Service | 4005 | <http://localhost:4005> |
-| Payment Service | 4006 | <http://localhost:4006> |
-| Inventory Service | 4007 | <http://localhost:4007> |
+| API Gateway             | 4000 | <http://localhost:4000> |
+| User Service            | 4001 | <http://localhost:4001> |
+| Search Service          | 4002 | <http://localhost:4002> |
+| Admin Service           | 4003 | <http://localhost:4003> |
+| Notification Service    | 4004 | (Kafka-only, no HTTP)   |
+| Booking Service         | 4005 | <http://localhost:4005> |
+| Payment Service         | 4006 | <http://localhost:4006> |
+| Inventory Service       | 4007 | <http://localhost:4007> |
 
 ### Infrastructure (from [docker-compose.yml](docker-compose.yml))
 
-| Component | Port(s) | Access |
-|---|---|---|
-| PostgreSQL 15 | 5432 | `admin` / `irctcpass` |
-| pgAdmin | 8081 | <http://localhost:8081> — `admin@admin.com` / `admin` |
-| Redis Stack | 6379 (Redis), 8001 (RedisInsight) | password `irctcpass` — RedisInsight at <http://localhost:8001> |
-| Zookeeper | 2181 | — |
-| Kafka | 9092 (internal), 9093 (host) | host clients connect to `localhost:9093` |
-| Kafka UI | 8080 | <http://localhost:8080> |
-| Elasticsearch 8.12 | 9200 | <http://localhost:9200> (single-node, security disabled) |
-| Kibana 8.12 | 5601 | <http://localhost:5601> |
+| Component          | Port(s)                           | Access                                                         |
+| ------------------ | --------------------------------- | -------------------------------------------------------------- |
+| PostgreSQL 15      | 5432                              | `admin` / `irctcpass`                                          |
+| pgAdmin            | 8081                              | <http://localhost:8081> — `admin@admin.com` / `admin`          |
+| Redis Stack        | 6379 (Redis), 8001 (RedisInsight) | password `irctcpass` — RedisInsight at <http://localhost:8001> |
+| Zookeeper          | 2181                              | —                                                              |
+| Kafka              | 9092 (internal), 9093 (host)      | host clients connect to `localhost:9093`                       |
+| Kafka UI           | 8080                              | <http://localhost:8080>                                        |
+| Elasticsearch 8.12 | 9200                              | <http://localhost:9200> (single-node, security disabled)       |
+| Kibana 8.12        | 5601                              | <http://localhost:5601>                                        |
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Backend
 
@@ -168,7 +168,7 @@ A single quick-glance table of every port the project uses.
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -205,7 +205,7 @@ docker-compose up -d
 docker ps
 ```
 
-This starts **all** infrastructure containers: PostgreSQL, pgAdmin, Redis Stack, Zookeeper, Kafka, Kafka UI, Elasticsearch and Kibana. See the [Port Reference](#-port-reference) for access URLs.
+This starts **all** infrastructure containers: PostgreSQL, pgAdmin, Redis Stack, Zookeeper, Kafka, Kafka UI, Elasticsearch and Kibana. See the [Port Reference](#port-reference) for access URLs.
 
 #### 3. Install and configure each service
 
@@ -284,17 +284,17 @@ Single entrypoint. Routes requests to backend services, enforces JWT, applies pe
 
 **Notable endpoints:**
 
-| Method | Path | Notes |
-|---|---|---|
-| GET | `/health` | Liveness |
-| GET | `/api/gateway/health` | Aggregate downstream health |
-| GET | `/api/gateway/circuit-breakers` | Inspect breaker state |
-| ANY | `/api/users/*` → user-service | |
-| ANY | `/api/search/*` → search-service | |
-| ANY | `/api/admins/*` → admin-service | |
-| ANY | `/api/bookings/*` → booking-service | |
-| ANY | `/api/payments/*` → payment-service | |
-| ANY | `/api/inventory/*` → inventory-service | |
+| Method | Path                                   | Notes                       |
+| ------ | -------------------------------------- | --------------------------- |
+| GET    | `/health`                              | Liveness                    |
+| GET    | `/api/gateway/health`                  | Aggregate downstream health |
+| GET    | `/api/gateway/circuit-breakers`        | Inspect breaker state       |
+| ANY    | `/api/users/*` → user-service          |                             |
+| ANY    | `/api/search/*` → search-service       |                             |
+| ANY    | `/api/admins/*` → admin-service        |                             |
+| ANY    | `/api/bookings/*` → booking-service    |                             |
+| ANY    | `/api/payments/*` → payment-service    |                             |
+| ANY    | `/api/inventory/*` → inventory-service |                             |
 
 **Tech:** Express, axios, ioredis, jsonwebtoken, helmet, morgan, winston.
 
@@ -307,18 +307,18 @@ User registration, OTP verification, JWT issuance + rotation, Google OAuth, prof
 **Database:** PostgreSQL `user_service_database` (models: `User`, `AuthProvider`)
 **Gateway path:** `/api/users/*`
 
-| Method | Path | Auth |
-|---|---|---|
-| POST | `/auth/send-otp` | — |
-| POST | `/auth/verify-otp` | — |
-| POST | `/auth/login` | — |
-| POST | `/auth/refresh` | — |
-| POST | `/auth/google-auth` | — |
-| GET | `/user/profile` | JWT |
-| PUT | `/user/profile` | JWT |
-| DELETE | `/user/profile` | JWT |
-| GET | `/user/internal/:userId` | `INTERNAL_SERVICE_KEY` |
-| GET | `/health` | — |
+| Method | Path                     | Auth                   |
+| ------ | ------------------------ | ---------------------- |
+| POST   | `/auth/send-otp`         | —                      |
+| POST   | `/auth/verify-otp`       | —                      |
+| POST   | `/auth/login`            | —                      |
+| POST   | `/auth/refresh`          | —                      |
+| POST   | `/auth/google-auth`      | —                      |
+| GET    | `/user/profile`          | JWT                    |
+| PUT    | `/user/profile`          | JWT                    |
+| DELETE | `/user/profile`          | JWT                    |
+| GET    | `/user/internal/:userId` | `INTERNAL_SERVICE_KEY` |
+| GET    | `/health`                | —                      |
 
 **Kafka — produces:** `notification.otp-email`, `notification.welcome-email`
 
@@ -331,12 +331,12 @@ Train and station search backed by Elasticsearch. Indexes are kept fresh by cons
 **Datastore:** Elasticsearch (no Postgres)
 **Gateway path:** `/api/search/*`
 
-| Method | Path | Notes |
-|---|---|---|
-| GET | `/trains?from=&to=&date=` | Train search |
-| GET | `/autocomplete?q=` | Station autocomplete |
-| GET | `/debug/stations` | Indexed stations (debug) |
-| GET | `/debug/trains` | Indexed trains (debug) |
+| Method | Path                      | Notes                    |
+| ------ | ------------------------- | ------------------------ |
+| GET    | `/trains?from=&to=&date=` | Train search             |
+| GET    | `/autocomplete?q=`        | Station autocomplete     |
+| GET    | `/debug/stations`         | Indexed stations (debug) |
+| GET    | `/debug/trains`           | Indexed trains (debug)   |
 
 **Kafka — consumes:** `admin.station-created`, `admin.route-created`, `admin.schedule-created`, `admin.schedule-cancelled`, `inventory.seat-availability-updated`
 **DLQ:** `dlq.search-service`
@@ -350,20 +350,20 @@ Source of truth for stations, trains, routes and schedules. Publishes domain eve
 **Database:** PostgreSQL `admin_service_database` (models: `Station`, `Train`, `Seat`, `Route`, `RouteStation`, `Schedule`)
 **Gateway path:** `/api/admins/*`
 
-| Method | Path | Notes |
-|---|---|---|
-| GET | `/station` | List stations |
-| POST | `/station` | Create station |
-| GET | `/station/:stationId` | Get station |
-| GET | `/station/internal/:stationId` | Internal lookup |
-| GET | `/train` | List trains |
-| POST | `/train` | Create train |
-| GET | `/train/:trainId` | Get train |
-| POST | `/route` | Create route |
-| GET | `/schedule` | List schedules |
-| POST | `/schedule` | Create schedule |
-| PUT | `/schedule/:scheduleId` | Cancel schedule |
-| GET | `/health` | — |
+| Method | Path                           | Notes           |
+| ------ | ------------------------------ | --------------- |
+| GET    | `/station`                     | List stations   |
+| POST   | `/station`                     | Create station  |
+| GET    | `/station/:stationId`          | Get station     |
+| GET    | `/station/internal/:stationId` | Internal lookup |
+| GET    | `/train`                       | List trains     |
+| POST   | `/train`                       | Create train    |
+| GET    | `/train/:trainId`              | Get train       |
+| POST   | `/route`                       | Create route    |
+| GET    | `/schedule`                    | List schedules  |
+| POST   | `/schedule`                    | Create schedule |
+| PUT    | `/schedule/:scheduleId`        | Cancel schedule |
+| GET    | `/health`                      | —               |
 
 **Kafka — produces:** `admin.station-created`, `admin.train-created`, `admin.route-created`, `admin.schedule-created`, `admin.schedule-cancelled`
 
@@ -385,14 +385,14 @@ Orchestrates the booking saga: locks seats in inventory, creates a payment order
 **Database:** PostgreSQL `booking_service_database` (`Booking` with saga tracking, segment bookings)
 **Gateway path:** `/api/bookings/*`
 
-| Method | Path | Auth |
-|---|---|---|
-| POST | `/bookings` | JWT |
-| GET | `/bookings` | JWT |
-| GET | `/bookings/:bookingId` | JWT |
-| POST | `/bookings/:bookingId/verify-payment` | JWT |
-| POST | `/bookings/:bookingId/cancel` | JWT |
-| GET | `/health` | — |
+| Method | Path                                  | Auth |
+| ------ | ------------------------------------  | ---- |
+| POST   | `/bookings`                           | JWT  |
+| GET    | `/bookings`                           | JWT  |
+| GET    | `/bookings/:bookingId`                | JWT  |
+| POST   | `/bookings/:bookingId/verify-payment` | JWT  |
+| POST   | `/bookings/:bookingId/cancel`         | JWT  |
+| GET    | `/health`                             | —    |
 
 **Kafka — produces:** `booking.confirmed`, `booking.failed`, `booking.cancelled`
 **Kafka — consumes:** `payment.success`, `payment.failed`, `admin.schedule-cancelled`
@@ -406,14 +406,14 @@ Razorpay integration. Creates payment orders, verifies signatures, processes web
 **Database:** PostgreSQL `payment_service_database` (models: `PaymentOrder`, `Refund`, `PaymentAuditLog`)
 **Gateway path:** `/api/payments/*`
 
-| Method | Path | Auth |
-|---|---|---|
-| POST | `/orders` | `INTERNAL_SERVICE_KEY` |
-| GET | `/orders/:paymentOrderId` | `INTERNAL_SERVICE_KEY` |
-| POST | `/orders/:paymentOrderId/verify` | `INTERNAL_SERVICE_KEY` |
-| POST | `/refunds` | `INTERNAL_SERVICE_KEY` |
-| POST | `/webhooks/razorpay` | Razorpay signature (raw body) |
-| GET | `/health` | — |
+| Method | Path                             | Auth                          |
+| ------ | -------------------------------- | ----------------------------- |
+| POST   | `/orders`                        | `INTERNAL_SERVICE_KEY`        |
+| GET    | `/orders/:paymentOrderId`        | `INTERNAL_SERVICE_KEY`        |
+| POST   | `/orders/:paymentOrderId/verify` | `INTERNAL_SERVICE_KEY`        |
+| POST   | `/refunds`                       | `INTERNAL_SERVICE_KEY`        |
+| POST   | `/webhooks/razorpay`             | Razorpay signature (raw body) |
+| GET    | `/health`                        | —                             |
 
 **Kafka — produces:** `payment.success`, `payment.failed`
 
@@ -459,22 +459,22 @@ npm run preview
 
 All topic names live in [shared/constants/kafka-topics.js](shared/constants/kafka-topics.js).
 
-| Topic | Producer | Consumer(s) |
-|---|---|---|
-| `notification.otp-email` | user-service | notification-service |
-| `notification.welcome-email` | user-service | notification-service |
-| `admin.station-created` | admin-service | search-service |
-| `admin.train-created` | admin-service | — |
-| `admin.route-created` | admin-service | search-service |
-| `admin.schedule-created` | admin-service | inventory-service, search-service |
-| `admin.schedule-cancelled` | admin-service | inventory-service, search-service, booking-service |
-| `inventory.seat-availability-updated` | inventory-service | search-service |
-| `payment.success` | payment-service | booking-service |
-| `payment.failed` | payment-service | booking-service |
-| `booking.confirmed` | booking-service | notification-service |
-| `booking.failed` | booking-service | notification-service |
-| `booking.cancelled` | booking-service | notification-service |
-| `dlq.<service>` | each consumer on failure | (operator-driven) |
+| Topic                                 | Producer                 | Consumer(s)                                        |
+| ------------------------------------- | ------------------------ | -------------------------------------------------- |
+| `notification.otp-email`              | user-service             | notification-service                               |
+| `notification.welcome-email`          | user-service             | notification-service                               |
+| `admin.station-created`               | admin-service            | search-service                                     |
+| `admin.train-created`                 | admin-service            | —                                                  |
+| `admin.route-created`                 | admin-service            | search-service                                     |
+| `admin.schedule-created`              | admin-service            | inventory-service, search-service                  |
+| `admin.schedule-cancelled`            | admin-service            | inventory-service, search-service, booking-service |
+| `inventory.seat-availability-updated` | inventory-service        | search-service                                     |
+| `payment.success`                     | payment-service          | booking-service                                    |
+| `payment.failed`                      | payment-service          | booking-service                                    |
+| `booking.confirmed`                   | booking-service          | notification-service                               |
+| `booking.failed`                      | booking-service          | notification-service                               |
+| `booking.cancelled`                   | booking-service          | notification-service                               |
+| `dlq.<service>`                       | each consumer on failure | (operator-driven)                                  |
 
 Every consumer is wrapped with [shared/utils/dlqHandler.js](shared/utils/dlqHandler.js), which retries up to 3 times before publishing the failed message to the service's DLQ topic.
 
@@ -751,7 +751,7 @@ INTERNAL_SERVICE_KEY=your_shared_internal_service_key
 VITE_API_BASE_URL=/api
 ```
 
-**🔒 Security checklist**
+#### **🔒 Security checklist**
 
 - ❌ Never commit `.env` files.
 - ✅ The same `INTERNAL_SERVICE_KEY` value must be set across all services that talk to each other internally (user, admin, booking, payment, inventory, notification).
@@ -762,7 +762,7 @@ VITE_API_BASE_URL=/api
 
 ## 📁 Project Structure
 
-```
+```txt
 irctc-backend/
 ├── api-gateway/           # Port 4000 — entry point, JWT, rate-limit, circuit breaker
 ├── user-service/          # Port 4001 — auth, OTP, JWT, profile (Postgres + Redis)
@@ -785,7 +785,7 @@ irctc-backend/
 
 Each backend service follows the same internal layout:
 
-```
+```txt
 <service>/
 ├── src/
 │   ├── index.js           # Server bootstrap
